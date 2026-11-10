@@ -133,7 +133,12 @@ h1 .acc{color:var(--acc);text-shadow:0 0 40px rgba(79,227,232,.35)}
 .hero p.lead{max-width:46ch;color:var(--mut);margin:24px 0 0;font-size:clamp(15px,2.2vw,19px)}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 .stage{position:relative;z-index:2;flex:1 1 auto;min-height:260px;margin-top:-4vw;touch-action:pan-y;cursor:crosshair;display:flex;align-items:flex-end}
-.stage svg{width:min(1180px,118%);margin-inline:auto;transform:translateX(0)}
+.car{position:relative;width:min(1100px,130%);margin-inline:auto;--bx:50%;--by:45%;-webkit-mask-image:radial-gradient(ellipse 50% 52% at 50% 50%,#000 58%,transparent 100%);mask-image:radial-gradient(ellipse 50% 52% at 50% 50%,#000 58%,transparent 100%)}
+.car img{display:block;width:100%;height:auto}
+.c-base{filter:brightness(.55) saturate(.85)}
+.c-gloss{position:absolute;inset:0;filter:brightness(1.7) saturate(1.3) contrast(1.05);mix-blend-mode:screen;
+  -webkit-mask-image:linear-gradient(100deg,transparent calc(var(--bx) - 16%),#000 var(--bx),transparent calc(var(--bx) + 16%)),radial-gradient(circle 24% at var(--bx) var(--by),#000,transparent);
+  mask-image:linear-gradient(100deg,transparent calc(var(--bx) - 16%),#000 var(--bx),transparent calc(var(--bx) + 16%)),radial-gradient(circle 24% at var(--bx) var(--by),#000,transparent)}
 .hint{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:4;font:600 11px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--mut);display:flex;gap:10px;align-items:center;white-space:nowrap;pointer-events:none}
 .hint i{display:block;width:1px;height:26px;background:linear-gradient(var(--acc),transparent);animation:hint 2s infinite}
 @keyframes hint{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
@@ -316,12 +321,12 @@ footer a:hover{color:var(--acc)}
   .menu-open .nav{transform:none;opacity:1;pointer-events:auto}
   .hdr .wrap{gap:10px}
 }
-@media(max-width:899px){.stage svg{width:140%}}
+@media(max-width:899px){.car{width:150%;margin-left:-25%}}
 @media(min-width:1000px){
   .hero{min-height:max(100vh,720px)}
   .hero-in{padding-top:120px;padding-bottom:60px}
   .hero .stage{position:absolute;right:1%;bottom:0;width:58%;min-height:0;margin:0}
-  .stage svg{width:100%}
+  .car{width:100%}
   .hint{left:auto;right:6%;transform:none;bottom:24px}
 }
 @media(max-width:560px){.btn{width:100%}.cta .btn{flex:1 1 100%}}
@@ -382,50 +387,10 @@ footer a:hover{color:var(--acc)}
   </div>
 
   <div class="stage" id="stage" aria-hidden="true">
-    <svg viewBox="0 0 1000 480" id="carSvg" role="img" focusable="false">
-      <defs>
-        <path id="bodyP" d="M60 262C58 236 70 222 98 216L214 196C262 144 336 108 430 100L600 98C690 100 764 140 808 186L882 198C930 206 950 228 950 262L950 282L60 282Z"/>
-        <path id="glassP" d="M268 190C306 152 364 126 436 120L470 119L470 190ZM490 119L596 118C660 121 716 152 752 190L490 190Z"/>
-        <linearGradient id="bodyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1d22"/><stop offset=".55" stop-color="#0c0d10"/><stop offset="1" stop-color="#050506"/></linearGradient>
-        <linearGradient id="glossG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".3" stop-color="#bff7f9" stop-opacity=".55"/><stop offset=".6" stop-color="#4FE3E8" stop-opacity=".22"/><stop offset="1" stop-color="#4FE3E8" stop-opacity="0"/></linearGradient>
-        <linearGradient id="beamG" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-        <radialGradient id="spotG"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-        <linearGradient id="fadeG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></linearGradient>
-        <mask id="lightM" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="480">
-          <rect width="1000" height="480" fill="#000"/>
-          <g id="beam"><rect x="-130" y="0" width="260" height="400" fill="url(#beamG)" transform="skewX(-22)"/></g>
-          <circle id="spot" cx="500" cy="190" r="170" fill="url(#spotG)" opacity=".85"/>
-        </mask>
-        <mask id="mirrorM" maskUnits="userSpaceOnUse" x="0" y="330" width="1000" height="150"><rect width="1000" height="150" y="338" fill="url(#fadeG)"/></mask>
-        <radialGradient id="floorG"><stop offset="0" stop-color="#4FE3E8" stop-opacity=".28"/><stop offset="1" stop-color="#4FE3E8" stop-opacity="0"/></radialGradient>
-        <filter id="blur3"><feGaussianBlur stdDeviation="2.5"/></filter>
-      </defs>
-      <ellipse cx="500" cy="340" rx="470" ry="26" fill="url(#floorG)"/>
-      <!-- reflecție pe podea -->
-      <g mask="url(#mirrorM)"><g transform="translate(0 676) scale(1 -1)" opacity=".9">
-        <use href="#bodyP" fill="url(#bodyG)"/><use href="#bodyP" fill="url(#glossG)" mask="url(#lightM)" opacity=".7"/>
-      </g></g>
-      <!-- caroserie -->
-      <use href="#bodyP" fill="url(#bodyG)" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
-      <use href="#glassP" fill="#0a0c0f" stroke="rgba(255,255,255,.1)"/>
-      <!-- luciul revelat de „lumina LED” -->
-      <g mask="url(#lightM)">
-        <use href="#bodyP" fill="url(#glossG)"/>
-        <use href="#glassP" fill="#9fefff" opacity=".35"/>
-        <path d="M112 238L930 242" stroke="#fff" stroke-width="2.4" fill="none" filter="url(#blur3)"/>
-        <path d="M214 196C262 146 336 110 430 102L600 100C690 102 762 142 806 188" stroke="#fff" stroke-width="2" fill="none" opacity=".9"/>
-        <path d="M70 258L944 262" stroke="#4FE3E8" stroke-width="1.6" fill="none" opacity=".8"/>
-      </g>
-      <!-- faruri -->
-      <path d="M922 214L948 224L944 238L914 230Z" fill="#dffcff"/><path d="M922 214L948 224L944 238L914 230Z" fill="#4FE3E8" filter="url(#blur3)" opacity=".9"/>
-      <path d="M64 236L86 228L90 242L66 248Z" fill="#ff4a4a" opacity=".75"/>
-      <!-- roți -->
-      <g id="wheels">
-        <circle cx="250" cy="282" r="72" fill="#0a0b0d"/><circle cx="770" cy="282" r="72" fill="#0a0b0d"/>
-        <g><circle cx="250" cy="282" r="54" fill="#050506" stroke="#1d2126" stroke-width="3"/><circle cx="250" cy="282" r="36" fill="#14171b" stroke="rgba(79,227,232,.55)" stroke-width="2"/><circle cx="250" cy="282" r="8" fill="#4FE3E8" opacity=".8"/></g>
-        <g><circle cx="770" cy="282" r="54" fill="#050506" stroke="#1d2126" stroke-width="3"/><circle cx="770" cy="282" r="36" fill="#14171b" stroke="rgba(79,227,232,.55)" stroke-width="2"/><circle cx="770" cy="282" r="8" fill="#4FE3E8" opacity=".8"/></g>
-      </g>
-    </svg>
+    <div class="car" id="carImg">
+      <img class="c-base" src="img/hero-car.webp" srcset="img/hero-car-m.webp 900w, img/hero-car.webp 1600w" sizes="(min-width:1000px) 58vw, 100vw" width="1600" height="900" alt="" fetchpriority="high" decoding="async">
+      <img class="c-gloss" src="img/hero-car.webp" srcset="img/hero-car-m.webp 900w, img/hero-car.webp 1600w" sizes="(min-width:1000px) 58vw, 100vw" width="1600" height="900" alt="" decoding="async">
+    </div>
     <div class="hint"><i></i><span data-i18n="h_hint">Mișcă lumina peste caroserie</span></div>
   </div>
 </section>
@@ -793,21 +758,20 @@ $$('.card').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundin
     const y=j*80,l=document.createElementNS(NS,'line');
     l.setAttribute('x1',-40);l.setAttribute('x2',1040);l.setAttribute('y1',y);l.setAttribute('y2',y);l.setAttribute('pathLength',1);l.style.setProperty('--dl',(.6+j*.18)+'s');l.style.strokeWidth='1';g.appendChild(l)
   }
-  const stage=$('#stage'),hero=$('#hero'),svg=$('#carSvg'),beam=$('#beam'),spot=$('#spot'),hot=$('#ceilHot'),hex=$('#heroHex'),hint=$('.hint');
-  let tx=500,ty=190,cx=500,cy=190,last=-1e9,vis=true,raf=0,ph=0;
-  function toSvg(e){const r=svg.getBoundingClientRect();tx=Math.max(0,Math.min(1000,(e.clientX-r.left)/r.width*1000));ty=Math.max(60,Math.min(300,(e.clientY-r.top)/r.height*480));last=performance.now();
+  const stage=$('#stage'),hero=$('#hero'),car=$('#carImg'),hot=$('#ceilHot'),hex=$('#heroHex'),hint=$('.hint');
+  let tx=500,ty=450,cx=500,cy=450,last=-1e9,vis=true,raf=0,ph=0;
+  function toSvg(e){const r=car.getBoundingClientRect();tx=Math.max(0,Math.min(1000,(e.clientX-r.left)/r.width*1000));ty=Math.max(150,Math.min(850,(e.clientY-r.top)/r.height*1000));last=performance.now();
     hex.style.setProperty('--mx',(e.clientX-hero.getBoundingClientRect().left)+'px');hex.style.setProperty('--my',(e.clientY-hero.getBoundingClientRect().top)+'px');if(hint)hint.style.opacity=0}
   hero.addEventListener('pointermove',toSvg,{passive:true});
   hero.addEventListener('pointerdown',toSvg,{passive:true});
   function frame(now){
-    if(now-last>2200&&!RM){ph+=.012;tx=500+Math.sin(ph)*430;ty=170+Math.cos(ph*1.7)*40}
+    if(now-last>2200&&!RM){ph+=.012;tx=500+Math.sin(ph)*400;ty=450+Math.cos(ph*1.7)*120}
     cx+=(tx-cx)*.12;cy+=(ty-cy)*.12;
-    beam.setAttribute('transform','translate('+cx+' 0)');
-    spot.setAttribute('cx',cx);spot.setAttribute('cy',cy);
+    car.style.setProperty('--bx',(cx/10)+'%');car.style.setProperty('--by',(cy/10)+'%');
     hot.setAttribute('transform','translate('+(cx*.78+110)+' 0)');
     raf=requestAnimationFrame(frame);
   }
-  if(RM){beam.setAttribute('transform','translate(480 0)');spot.setAttribute('cx',480);hot.setAttribute('transform','translate(500 0)');}
+  if(RM){car.style.setProperty('--bx','48%');hot.setAttribute('transform','translate(500 0)');}
   else{
     const hio=new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis&&!raf)raf=requestAnimationFrame(frame);else if(!vis){cancelAnimationFrame(raf);raf=0}});hio.observe(hero);
   }
