@@ -133,18 +133,13 @@ h1 .acc{color:var(--acc);text-shadow:0 0 40px rgba(79,227,232,.35)}
 .hero p.lead{max-width:46ch;color:var(--mut);margin:24px 0 0;font-size:clamp(15px,2.2vw,19px)}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 .stage{position:relative;z-index:2;flex:1 1 auto;min-height:260px;margin-top:-4vw;touch-action:pan-y;cursor:crosshair;display:flex;align-items:flex-end}
-.car{position:relative;width:min(1100px,130%);margin-inline:auto;--bx:50%;--by:45%;-webkit-mask-image:radial-gradient(ellipse 50% 52% at 50% 50%,#000 58%,transparent 100%);mask-image:radial-gradient(ellipse 50% 52% at 50% 50%,#000 58%,transparent 100%)}
-.car img{display:block;width:100%;height:auto}
-.c-base{filter:brightness(.55) saturate(.85)}
-.c-gloss{position:absolute;inset:0;filter:brightness(1.7) saturate(1.3) contrast(1.05);mix-blend-mode:screen;
+.car{position:relative;width:min(1100px,130%);aspect-ratio:780/593;margin-inline:auto;--bx:50%;--by:45%;user-select:none;-webkit-user-select:none;-webkit-mask-image:radial-gradient(ellipse 50% 52% at 50% 50%,#000 58%,transparent 100%);mask-image:radial-gradient(ellipse 50% 52% at 50% 50%,#000 58%,transparent 100%)}
+.layer{position:absolute;inset:0}
+.layer .f{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;-webkit-user-drag:none;pointer-events:none}
+.c-base{filter:brightness(.62) saturate(.9)}
+.c-gloss{filter:brightness(1.8) saturate(1.3) contrast(1.05);mix-blend-mode:screen;
   -webkit-mask-image:linear-gradient(100deg,transparent calc(var(--bx) - 16%),#000 var(--bx),transparent calc(var(--bx) + 16%)),radial-gradient(circle 24% at var(--bx) var(--by),#000,transparent);
   mask-image:linear-gradient(100deg,transparent calc(var(--bx) - 16%),#000 var(--bx),transparent calc(var(--bx) + 16%)),radial-gradient(circle 24% at var(--bx) var(--by),#000,transparent)}
-.hint{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:4;font:600 11px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--mut);display:flex;gap:10px;align-items:center;white-space:nowrap;pointer-events:none}
-.hint i{display:block;width:1px;height:26px;background:linear-gradient(var(--acc),transparent);animation:hint 2s infinite}
-@keyframes hint{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-
-/* ---------- services ---------- */
-.grid3{display:grid;gap:16px;grid-template-columns:1fr}
 @media(min-width:640px){.grid3{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1000px){.grid3{grid-template-columns:repeat(3,1fr)}}
 .card{position:relative;background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:12px;overflow:hidden;isolation:isolate;transition:transform .35s,border-color .35s}
@@ -388,10 +383,24 @@ footer a:hover{color:var(--acc)}
 
   <div class="stage" id="stage" aria-hidden="true">
     <div class="car" id="carImg">
-      <img class="c-base" src="img/hero-car.webp" srcset="img/hero-car-m.webp 900w, img/hero-car.webp 1600w" sizes="(min-width:1000px) 58vw, 100vw" width="1600" height="900" alt="" fetchpriority="high" decoding="async">
-      <img class="c-gloss" src="img/hero-car.webp" srcset="img/hero-car-m.webp 900w, img/hero-car.webp 1600w" sizes="(min-width:1000px) 58vw, 100vw" width="1600" height="900" alt="" decoding="async">
+      <div class="layer c-base">
+        <img class="f" src="img/car-0.webp" width="780" height="593" alt="" loading="lazy" decoding="async">
+        <img class="f" src="img/car-1.webp" width="780" height="593" alt="" fetchpriority="high" decoding="async">
+        <img class="f" src="img/car-2.webp" width="780" height="593" alt="" loading="lazy" decoding="async">
+        <img class="f" src="img/car-3.webp" width="780" height="593" alt="" loading="lazy" decoding="async">
+        <img class="f" src="img/car-4.webp" width="780" height="593" alt="" loading="lazy" decoding="async">
+        <img class="f" src="img/car-5.webp" width="780" height="593" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="layer c-gloss">
+        <img class="f" src="img/car-0.webp" width="780" height="593" alt="" loading="lazy" decoding="async">
+        <img class="f" src="img/car-1.webp" width="780" height="593" alt="" decoding="async">
+        <img class="f" src="img/car-2.webp" width="780" height="593" alt="" loading="lazy" decoding="async">
+        <img class="f" src="img/car-3.webp" width="780" height="593" alt="" loading="lazy" decoding="async">
+        <img class="f" src="img/car-4.webp" width="780" height="593" alt="" loading="lazy" decoding="async">
+        <img class="f" src="img/car-5.webp" width="780" height="593" alt="" loading="lazy" decoding="async">
+      </div>
     </div>
-    <div class="hint"><i></i><span data-i18n="h_hint">Mișcă lumina peste caroserie</span></div>
+    <div class="hint"><i></i><span data-i18n="h_hint">Mișcă mouse-ul sau trage cu degetul — rotește mașina</span></div>
   </div>
 </section>
 
@@ -628,7 +637,7 @@ const RU={
  nav_svc:'Услуги',nav_ppf:'Калькулятор PPF',nav_work:'Работы',nav_game:'Игра',nav_video:'Видео',nav_contact:'Контакты',nav_why:'Почему мы',menu:'Меню',
  h_kick:'Студия детейлинга · Кишинёв',h1a:'Блеск.',h1b:'Без',h1c:'компромиссов.',
  h_lead:'Детейлинг авто в Кишинёве: полировка, плёнка PPF, химчистка и шумоизоляция — в нашей студии со светодиодным светом.',
- cta_book:'Записаться',cta_play:'Играй и выигрывай',h_hint:'Проведи светом по кузову',
+ cta_book:'Записаться',cta_play:'Играй и выигрывай',h_hint:'Двигай мышью или проведи пальцем — вращай авто',
  svc_h:'Шесть услуг. Один стандарт.',svc_sub:'Выберите услугу и напишите нам — сообщение уже заполнено.',
  s1_t:'Полировка',s1_d:'Убираем микроцарапины и возвращаем глубину цвета.',
  s2_t:'Химчистка',s2_d:'Салон и кузов — от обивки до кузова.',
@@ -759,6 +768,18 @@ $$('.card').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundin
     l.setAttribute('x1',-40);l.setAttribute('x2',1040);l.setAttribute('y1',y);l.setAttribute('y2',y);l.setAttribute('pathLength',1);l.style.setProperty('--dl',(.6+j*.18)+'s');l.style.strokeWidth='1';g.appendChild(l)
   }
   const stage=$('#stage'),hero=$('#hero'),car=$('#carImg'),hot=$('#ceilHot'),hex=$('#heroHex'),hint=$('.hint');
+  const fr=$$('.f',car),N=6;let rot=1,rotT=1,lx=null;
+  const upd=()=>{fr.forEach((im,i)=>{const k=i%N;let d=Math.abs(rot-k);d=Math.min(d,N-d);const o=Math.max(0,1-d);im.style.opacity=o*o*(3-2*o)})};
+  const spin=e=>{ // lent: o lățime de mașină ≈ 2.2 din 6 cadre
+    const r=car.getBoundingClientRect();
+    if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom){lx=null;return}
+    if(lx!=null)rotT-=(e.clientX-lx)/r.width*2.2;
+    lx=e.clientX;
+    if(RM){rot=rotT=((rotT%N)+N)%N;upd()}};
+  hero.addEventListener('pointermove',spin,{passive:true});
+  hero.addEventListener('pointerdown',e=>{lx=e.clientX},{passive:true});
+  hero.addEventListener('pointerleave',()=>{lx=null});
+  upd();
   let tx=500,ty=450,cx=500,cy=450,last=-1e9,vis=true,raf=0,ph=0;
   function toSvg(e){const r=car.getBoundingClientRect();tx=Math.max(0,Math.min(1000,(e.clientX-r.left)/r.width*1000));ty=Math.max(150,Math.min(850,(e.clientY-r.top)/r.height*1000));last=performance.now();
     hex.style.setProperty('--mx',(e.clientX-hero.getBoundingClientRect().left)+'px');hex.style.setProperty('--my',(e.clientY-hero.getBoundingClientRect().top)+'px');if(hint)hint.style.opacity=0}
@@ -767,6 +788,7 @@ $$('.card').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundin
   function frame(now){
     if(now-last>2200&&!RM){ph+=.012;tx=500+Math.sin(ph)*400;ty=450+Math.cos(ph*1.7)*120}
     cx+=(tx-cx)*.12;cy+=(ty-cy)*.12;
+    if(Math.abs(rotT-rot)>.001){rot+=(rotT-rot)*.07;if(rot<0||rot>=N){const w=((rot%N)+N)%N;rotT+=w-rot;rot=w}upd()}
     car.style.setProperty('--bx',(cx/10)+'%');car.style.setProperty('--by',(cy/10)+'%');
     hot.setAttribute('transform','translate('+(cx*.78+110)+' 0)');
     raf=requestAnimationFrame(frame);
