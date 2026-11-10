@@ -174,13 +174,16 @@ h1 .acc{color:var(--acc);text-shadow:0 0 40px rgba(79,227,232,.35)}
 .ppf{display:grid;gap:28px;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:28px;padding:clamp(18px,4vw,44px);overflow:hidden;position:relative}
 @media(min-width:900px){.ppf{grid-template-columns:minmax(260px,.8fr) 1fr}}
 .ppf>*{position:relative}
-.carwrap{max-width:330px;margin-inline:auto;width:100%;position:relative}
+.carwrap{padding-top:22px;max-width:300px;margin-inline:auto;width:100%;position:relative}
 .carwrap .tag{position:absolute;left:50%;top:-4px;transform:translateX(-50%);font:700 10px var(--sans);letter-spacing:.3em;color:var(--mut);text-transform:uppercase}
 .zone{cursor:pointer;outline:none}
-.zone .z{fill:rgba(255,255,255,.04);stroke:rgba(255,255,255,.35);stroke-width:1.2;transition:fill .3s,stroke .3s,filter .3s}
-.zone:hover .z{fill:rgba(79,227,232,.18);stroke:var(--acc)}
+.zone .z{fill:rgba(79,227,232,.05);stroke:rgba(79,227,232,.45);stroke-width:1.2;stroke-dasharray:5 5;vector-effect:non-scaling-stroke;transition:fill .3s,stroke .3s,filter .3s}
+.zone:hover .z{fill:rgba(79,227,232,.22);stroke:var(--acc)}
 .zone:focus-visible .z{stroke:#fff;stroke-width:2}
-.zone.on .z{fill:rgba(79,227,232,.38);stroke:var(--acc);filter:drop-shadow(0 0 7px rgba(79,227,232,.8))}
+.zone.on .z{fill:url(#zg);stroke:#c9fcfe;stroke-width:2;stroke-dasharray:none;filter:drop-shadow(0 0 8px rgba(79,227,232,.95)) drop-shadow(0 0 22px rgba(79,227,232,.6));animation:lit .5s ease-out}
+@keyframes lit{0%{opacity:.2}60%{opacity:1;filter:drop-shadow(0 0 18px #fff)}100%{opacity:1}}
+.glowimg{opacity:0;transition:opacity .5s;pointer-events:none}.full .glowimg{opacity:.5}
+.full .zone .z{fill:rgba(79,227,232,.2)}
 .body-o{fill:#0e1013;stroke:rgba(255,255,255,.45);stroke-width:1.6;transition:stroke .3s,filter .3s}
 .deco{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.18);transition:.3s}
 .full .body-o{stroke:var(--acc);filter:drop-shadow(0 0 10px rgba(79,227,232,.7))}
@@ -449,24 +452,28 @@ footer a:hover{color:var(--acc)}
       <div class="eyebrow">02 — PPF</div>
       <h2 class="t" data-i18n="ppf_h">Configurator PPF</h2>
       <div class="led"></div>
-      <p class="sub" data-i18n="ppf_sub">Bifează zonele pe care vrei să le protejezi și vezi estimarea.</p>
+      <p class="sub" data-i18n="ppf_sub">Atinge zonele de pe mașină (sau bifează-le din listă) și vezi estimarea.</p>
     </div>
     <div class="ppf rv" id="ppfBox">
       <div class="hexbg" style="opacity:.2;--mx:30%;--my:50%"></div>
       <div class="carwrap">
         <span class="tag" data-i18n="ppf_front">Față</span>
-        <svg viewBox="0 0 320 600" id="ppfSvg" role="group" aria-label="Zone auto">
+        <svg viewBox="0 0 887 1774" id="ppfSvg" role="group" aria-label="Zone auto">
+          <defs>
+            <filter id="tealize" x="-5%" y="-5%" width="110%" height="110%">
+              <feColorMatrix type="matrix" values="0 0 0 0 .31  0 0 0 0 .89  0 0 0 0 .91  0 0 0 1.6 0"/>
+              <feGaussianBlur stdDeviation="6"/>
+            </filter>
+            <linearGradient id="zg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9ff4f7" stop-opacity=".75"/><stop offset="1" stop-color="#4FE3E8" stop-opacity=".4"/></linearGradient>
+          </defs>
           <g id="carTop">
-            <path class="body-o" d="M70 96C70 46 112 24 160 24C208 24 250 46 250 96L258 224L262 404C262 500 250 564 215 580L105 580C70 564 58 500 58 404L62 224Z"/>
-            <path class="deco" d="M94 248L226 248L214 306L106 306Z"/>
-            <path class="deco" d="M106 314L214 314L214 408L106 408Z"/>
-            <path class="deco" d="M108 416L212 416L222 462L98 462Z"/>
-            <path class="deco" d="M96 470C130 478 190 478 224 470L228 540C200 554 120 554 92 540Z"/>
+            <image href="img/ppf-top.webp" x="0" y="0" width="887" height="1774" preserveAspectRatio="xMidYMid meet"/>
+            <image class="glowimg" href="img/ppf-top.webp" x="0" y="0" width="887" height="1774" filter="url(#tealize)"/>
           </g>
-          <g class="zone" data-zone="bumper" tabindex="0" role="checkbox" aria-checked="false" aria-label="Bară"><path class="z" d="M82 64C88 40 120 30 160 30C200 30 232 40 238 64L224 80C200 74 120 74 96 80Z"/></g>
-          <g class="zone" data-zone="headlights" tabindex="0" role="checkbox" aria-checked="false" aria-label="Faruri"><path class="z" d="M84 88L124 82L128 100L90 110Z"/><path class="z" d="M236 88L196 82L192 100L230 110Z"/></g>
-          <g class="zone" data-zone="hood" tabindex="0" role="checkbox" aria-checked="false" aria-label="Capotă"><path class="z" d="M98 118C124 108 196 108 222 118L238 238L82 238Z"/></g>
-          <g class="zone" data-zone="mirrors" tabindex="0" role="checkbox" aria-checked="false" aria-label="Oglinzi"><path class="z" d="M30 240L62 244L60 270L32 268Z"/><path class="z" d="M290 240L258 244L260 270L288 268Z"/></g>
+          <g class="zone" data-zone="bumper" tabindex="0" role="checkbox" aria-checked="false" aria-label="Bară"><path class="z" d="M262 78C340 20 546 20 626 78L650 112C560 92 330 92 238 112Z"/></g>
+          <g class="zone" data-zone="headlights" tabindex="0" role="checkbox" aria-checked="false" aria-label="Faruri"><path class="z" d="M172 222C160 165 190 122 238 108L302 104C292 152 262 205 205 238Z"/><path class="z" d="M715 222C727 165 697 122 649 108L585 104C595 152 625 205 682 238Z"/></g>
+          <g class="zone" data-zone="hood" tabindex="0" role="checkbox" aria-checked="false" aria-label="Capotă"><path class="z" d="M312 124L575 124L648 240L690 470C560 452 330 452 197 470L240 240Z"/></g>
+          <g class="zone" data-zone="mirrors" tabindex="0" role="checkbox" aria-checked="false" aria-label="Oglinzi"><path class="z" d="M82 640L104 612L168 598L192 614L182 670L102 676Z"/><path class="z" d="M805 640L783 612L719 598L695 614L705 670L785 676Z"/></g>
         </svg>
       </div>
       <div>
@@ -646,7 +653,7 @@ const RU={
  s5_t:'Защита PPF',s5_d:'Прозрачная плёнка защищает лак от камней и царапин.',
  s6_t:'Антихром',s6_d:'Хромированные элементы становятся чёрными — агрессивнее и чище.',
  book_svc:'Записаться',from:'от',price_todo:'[цена]',
- ppf_h:'Калькулятор PPF',ppf_sub:'Отметьте зоны, которые хотите защитить, и посмотрите расчёт.',ppf_front:'Перед',
+ ppf_h:'Калькулятор PPF',ppf_sub:'Нажмите на зоны авто (или отметьте в списке) и посмотрите расчёт.',ppf_front:'Перед',
  z_hood:'Капот',z_bumper:'Бампер',z_mirrors:'Зеркала',z_headlights:'Фары',z_full:'Весь кузов',
  ppf_est:'Расчёт',ppf_cta:'Запросить цену в WhatsApp',ppf_pending:'Цены будут добавлены.',ppf_note:'Ориентировочный расчёт. Итоговая цена — после осмотра в студии.',ppf_none:'Выберите зоны',
  ba_h:'До / После',ba_sub:'Потяните ползунок и увидите разницу.',ba_before:'До',ba_after:'После',ba_ph:'[Фото от клиента]',ba_work:'Работа',
